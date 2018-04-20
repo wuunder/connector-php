@@ -51,15 +51,17 @@ class Shipment {
             $this->apiKey->getApiKey(), json_encode($this->config));
         $shipmentRequest->send();
 
-        $shipmentData = null;
+        $body = null;
+        $header = null;
         $error = null;
 
         if (isset($shipmentRequest->getResponseHeaders()["http_code"]) && strpos($shipmentRequest->getResponseHeaders()["http_code"], "201 Created") !== false) {
-            $shipmentData = $shipmentRequest->getResponse();
+            $body = $shipmentRequest->getBody();
+            $header = $shipmentRequest->getResponseHeaders();
         } else {
             $error = $shipmentRequest->getResponse();
         }
-        $this->shipmentResponse = new ShipmentApiResponse($shipmentData, $error);
+        $this->shipmentResponse = new ShipmentApiResponse($header, $body, $error);
 
         return is_null($error);
     }

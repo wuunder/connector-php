@@ -18,6 +18,28 @@ spl_autoload_register(function ($class_name) {
 include("Connector.php");
 
 $connector = new Wuunder\Connector("YVc7rKdM6e6Q_HQK81NCt7SM0LT0TtQB");
+
+$parcelshopsRequest = $connector->getParcelshops();
+
+$parcelshopsConfig = new \Wuunder\Api\Config\ParcelshopsConfig();
+$parcelshopsConfig->setProviders(array("DHL_PARCEL", "DPD"));
+$parcelshopsConfig->setAddress("Wilgenlaan 8 maasbracht");
+$parcelshopsConfig->setLimit(40);
+
+if ($parcelshopsConfig->validate()) {
+    $parcelshopsRequest->setConfig($parcelshopsConfig);
+
+    if ($parcelshopsRequest->fire()) {
+        var_dump($parcelshopsRequest->getParcelshopsResponse()->getParcelshopsData());
+    } else {
+        var_dump($parcelshopsRequest->getParcelshopsResponse()->getError());
+    }
+} else {
+    print("ParcelshopsConfig not complete");
+}
+
+print("----------");
+
 $booking = $connector->createBooking();
 
 $bookingConfig = new Wuunder\Api\Config\BookingConfig();

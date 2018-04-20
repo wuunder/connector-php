@@ -51,15 +51,16 @@ class Booking
             $this->apiKey->getApiKey(), json_encode($this->config));
         $bookingRequest->send();
 
-        $bookingUrl = null;
+        $body = null;
+        $header = null;
         $error = null;
 
         if (isset($bookingRequest->getResponseHeaders()["location"])) {
-            $bookingUrl = $bookingRequest->getResponseHeaders()["location"];
+            $header = $bookingRequest->getResponseHeaders();
         } else {
             $error = $bookingRequest->getResponse();
         }
-        $this->bookingResponse = new BookingApiResponse($bookingUrl, $error);
+        $this->bookingResponse = new BookingApiResponse($header, $body, $error);
 
         return is_null($error);
     }

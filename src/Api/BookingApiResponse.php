@@ -3,12 +3,10 @@
 namespace Wuunder\Api;
 
 class BookingApiResponse extends ApiResponse {
-    private $bookingUrl;
 
-    public function __construct($bookingUrl, $error)
+    public function __construct($header, $body, $error)
     {
-        parent::__construct($error);
-        $this->bookingUrl = $bookingUrl;
+        parent::__construct($header, $body, $error);
     }
 
     /**
@@ -18,6 +16,6 @@ class BookingApiResponse extends ApiResponse {
      */
     public function getBookingUrl()
     {
-        return $this->bookingUrl;
+        return $this->getHeader()['location'];
     }
 }

@@ -6,6 +6,7 @@ use Wuunder\Api\Booking;
 use Wuunder\Api\Key;
 use Wuunder\Api\Environment;
 use Wuunder\Api\Shipment;
+use Wuunder\Api\Parcelshops;
 
 class Connector
 {
@@ -35,6 +36,15 @@ class Connector
      */
     public function createShipment() {
         return new Shipment($this->apiKey, $this->apiEnvironment);
+    }
+
+    /**
+     * Creates a new Parcelshops
+     *
+     * @return Parcelshops
+     */
+    public function getParcelshops() {
+        return new Parcelshops($this->apiKey, $this->apiEnvironment);
     }
 
 
