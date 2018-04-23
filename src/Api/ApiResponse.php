@@ -15,6 +15,9 @@ class ApiResponse {
         $this->error = $error;
     }
 
+    /**
+    * @return mixed
+    */
     public function getError() {
         return $this->error;
     }

@@ -8,12 +8,15 @@ use Wuunder\Api\Endpoints\Booking;
 use Wuunder\Api\Endpoints\Shipment;
 use Wuunder\Api\Endpoints\Parcelshops;
 use Wuunder\Api\Endpoints\Parcelshop;
+use Wuunder\Util\Helper;
+
 
 class Connector
 {
 
     private $apiKey;
     private $apiEnvironment;
+    private $logger;
 
     public function __construct($apiKey, $isStaging = true)
     {
@@ -52,5 +55,27 @@ class Connector
         return new Parcelshop($this->apiKey, $this->apiEnvironment);
     }
 
+    /**
+    * Creates the logger functionality in Helper
+    *
+    */
+    public function setLogger($loggerClass, $loggerFunc) {
+        $helper = Helper::getInstance();
+        if(empty($loggerClass)) {
+            $helper->setLogger($loggerFunc);
+        } else {
+            $helper->setLogger(array($loggerClass, $loggerFunc));
+        }
+    }
+
+    /**
+    * Logs the input parameter
+    *
+    * @param $logText
+    */
+    public function log($logText) {
+        $helper = Helper::getInstance();
+        $helper->log($logText);
+    }
 
 }

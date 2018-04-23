@@ -52,7 +52,11 @@ class Parcelshops
     {
         $parcelshopsRequest = new GetRequest($this->apiEnvironment->getStageBaseUrl() . "/parcelshops_by_address" . $this->config->toGetParameters(),
             $this->apiKey->getApiKey());
-        $parcelshopsRequest->send();
+        try {
+            $parcelshopsRequest->send();
+        } catch(Exception $e) {
+            $this->logger->log($e);
+        }
 
         $body = null;
         $header = null;

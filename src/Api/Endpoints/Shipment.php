@@ -7,6 +7,7 @@ use Wuunder\Api\Environment;
 use Wuunder\Api\Key;
 use Wuunder\Api\ShipmentApiResponse;
 use Wuunder\Http\PostRequest;
+use Wuunder\Util\Helper;
 
 class Shipment {
 
@@ -14,12 +15,14 @@ class Shipment {
     private $apiKey;
     private $apiEnvironment;
     private $shipmentResponse;
+    private $logger;
 
     public function __construct(Key $apiKey, Environment $apiEnvironment)
     {
         $this->config = new ShipmentConfig();
         $this->apiKey = $apiKey;
         $this->apiEnvironment = $apiEnvironment;
+        $this->logger = Helper::getInstance();
     }
 
     /**
@@ -52,7 +55,11 @@ class Shipment {
     {
         $shipmentRequest = new PostRequest($this->apiEnvironment->getStageBaseUrl() . "/shipments",
             $this->apiKey->getApiKey(), json_encode($this->config));
-        $shipmentRequest->send();
+        try {
+            $shipmentRequest->send();
+        } catch(Exception $e) {
+            $this->logger->log($e);
+        }
 
         $body = null;
         $header = null;

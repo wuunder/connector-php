@@ -27,17 +27,33 @@ abstract class Config implements \JsonSerializable
         }
     }
 
+    /**
+    * Adds together default and user input items
+    *
+    * @return array A full list of all the items that are set by user and default
+    */
     public function jsonSerialize()
     {
         return array_merge($this->defaultFields, $this->setFields);
     }
 
+    /**
+    * Validates the user input data
+    *
+    * @return bool
+    */
     public function validate()
     {
         $resultingData = array_merge($this->defaultFields, $this->setFields);
         return $this->_arrayKeysExists($this->requiredFields, $resultingData);
     }
 
+    /**
+    * Camelcase to underscore
+    *
+    * @param $name
+    * @return $result
+    */
     private function _underscore($name)
     {
         if (isset(self::$_underscoreCache[$name])) {
@@ -48,6 +64,12 @@ abstract class Config implements \JsonSerializable
         return $result;
     }
 
+    /**
+    * Checks wether all keys are used in array
+    *
+    * @param $keys, $arr
+    * @return bool
+    */
     private function _arrayKeysExists(array $keys, array $arr)
     {
         return !array_diff_key(array_flip($keys), $arr);

@@ -12,6 +12,12 @@ class ParcelshopConfig extends Config
         );
     }
 
+    /**
+    * Checks if the key is set, returns it if true
+    *
+    * @param $key
+    * @return $setFields
+    */
     public function get($key)
     {
         if (!isset($this->setFields[$key]))

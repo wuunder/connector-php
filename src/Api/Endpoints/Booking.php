@@ -7,6 +7,7 @@ use Wuunder\Api\Config\BookingConfig;
 use Wuunder\Api\Environment;
 use Wuunder\Api\Key;
 use Wuunder\Http\PostRequest;
+use Wuunder\Util\Helper;
 
 class Booking
 {
@@ -14,12 +15,14 @@ class Booking
     private $apiKey;
     private $apiEnvironment;
     private $bookingResponse;
+    private $logger;
 
     public function __construct(Key $apiKey, Environment $apiEnvironment)
     {
         $this->config = new BookingConfig();
         $this->apiKey = $apiKey;
         $this->apiEnvironment = $apiEnvironment;
+        $this->logger = Helper::getInstance();
     }
 
     /**
@@ -52,7 +55,11 @@ class Booking
     {
         $bookingRequest = new PostRequest($this->apiEnvironment->getStageBaseUrl() . "/bookings",
             $this->apiKey->getApiKey(), json_encode($this->config));
-        $bookingRequest->send();
+        try {
+          $bookingRequest->send();
+        } catch(Exception $e) {
+            $this->logger->log($e);
+        }
 
         $body = null;
         $header = null;
@@ -77,4 +84,5 @@ class Booking
     {
         return $this->bookingResponse;
     }
+2
 }
