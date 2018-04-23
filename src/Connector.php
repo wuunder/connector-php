@@ -8,6 +8,8 @@ use Wuunder\Api\Endpoints\Booking;
 use Wuunder\Api\Endpoints\Shipment;
 use Wuunder\Api\Endpoints\Parcelshops;
 use Wuunder\Api\Endpoints\Parcelshop;
+use Wuunder\Util\Helper;
+
 
 class Connector
 {
@@ -54,11 +56,18 @@ class Connector
     }
 
     public function setLogger($loggerClass, $loggerFunc) {
-        $this->logger = array($loggerClass, $loggerFunc);
+        // $this->logger = array($loggerClass, $loggerFunc);
+        $helper = Helper::getInstance();
+        if(empty($loggerClass)) {
+            $helper->setLogger($loggerFunc);
+        } else {
+            $helper->setLogger(array($loggerClass, $loggerFunc));
+        }
     }
 
     public function log() {
-        call_user_func_array($this->logger, array("This is the log function"));
+        $helper = Helper::getInstance();
+        $helper->log("Hallo");
     }
 
 }
