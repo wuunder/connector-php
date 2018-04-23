@@ -2,6 +2,8 @@
 
 namespace Wuunder\Model;
 
+use Wuunder\Util\Helper;
+
 class Model
 {
     private $keys;
@@ -11,6 +13,7 @@ class Model
     public function __construct()
     {
         $this->keys = array();
+        $this->helper = Helper::getInstance();
     }
 
     public function __call($method, $args)
@@ -21,10 +24,9 @@ class Model
                 if (isset($this->data[$key])) {
                     return $this->data[$key];
                 } else {
-                    
+                    $this->helper->log("Unable to return data. Unknown key " . $key);
                     return null;
                 }
-
         }
         return null;
     }
@@ -75,7 +77,7 @@ class Model
         foreach ($data as $key => $value) {
             if (array_key_exists($key, $keysMap) || is_object($value)) {
                 if (is_object($value)) {
-                    array_push($validatedData, $this->loopInnerData($value, $keysMap[0]));
+                    array_push($validatedData, $this->loopInnerData($value, $this->_isAssoc($keysMap) ? $keysMap[$key] : $keysMap[0]));
                 } elseif (is_array($value)) {
                     $validatedData[$key] = $this->loopInnerData($value, $keysMap[$key]);
                 } else {
@@ -86,6 +88,12 @@ class Model
             }
         }
         return $validatedData;
+    }
+
+    private function _isAssoc(array $arr)
+    {
+        if (array() === $arr) return false;
+        return array_keys($arr) !== range(0, count($arr) - 1);
     }
 
     private function _underscore($name)

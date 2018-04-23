@@ -74,7 +74,7 @@ class Parcelshops
     }
 
     /**
-     * Returns parcelshops response object
+     * Returns parcelshop models
      *
      * @return ParcelshopsApiResponse
      */

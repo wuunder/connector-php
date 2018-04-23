@@ -84,5 +84,4 @@ class Booking
     {
         return $this->bookingResponse;
     }
-2
 }

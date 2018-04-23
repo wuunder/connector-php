@@ -2,6 +2,8 @@
 
 namespace Wuunder\Api;
 
+use Wuunder\Model\ParcelshopModel;
+
 class ParcelshopApiResponse extends ApiResponse {
 
     public function __construct($header, $body, $error)
@@ -12,10 +14,10 @@ class ParcelshopApiResponse extends ApiResponse {
     /**
      * Returns parcelshop data
      *
-     * @return mixed
+     * @return ParcelshopModel
      */
     public function getParcelshopData()
     {
-        return $this->getBody();
+        return new ParcelshopModel($this->getBody());
     }
 }

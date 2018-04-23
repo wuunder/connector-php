@@ -29,9 +29,7 @@ if ($parcelshopConfig->validate()) {
     $parcelshopRequest->setConfig($parcelshopConfig);
 
     if ($parcelshopRequest->fire()) {
-        $data = $parcelshopRequest->getParcelshopResponse()->getParcelshopData();
-        $model = new \Wuunder\Model\ParcelshopModel($data);
-        var_dump($model->getCompanyName());
+        var_dump($parcelshopRequest->getParcelshopResponse()->getParcelshopData());
     } else {
         var_dump($parcelshopRequest->getParcelshopResponse()->getError());
     }
@@ -39,7 +37,7 @@ if ($parcelshopConfig->validate()) {
     print("ParcelshopConfig not complete");
 }
 
-print("----------\r\n"); exit;
+print("----------\r\n");
 
 $parcelshopsRequest = $connector->getParcelshopsByAddress();
 

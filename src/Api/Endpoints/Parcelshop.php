@@ -56,15 +56,17 @@ class Parcelshop
         $parcelshopRequest = new GetRequest($this->apiEnvironment->getStageBaseUrl() . "/parcelshops/" . $this->config->get("id"),
             $this->apiKey->getApiKey());
         try {
-          $parcelshopRequest->send();
-        } catch(Exception $e) {
+            $parcelshopRequest->send();
+        } catch (\Exception $e) {
             $this->logger->log($e);
         }
         $body = null;
         $header = null;
         $error = null;
 
-        if (isset($parcelshopRequest->getResponseHeaders()["http_code"]) && strpos($parcelshopRequest->getResponseHeaders()["http_code"], "200 OK") !== false) {
+        if (isset($parcelshopRequest->getResponseHeaders()["http_code"])
+            && strpos($parcelshopRequest->getResponseHeaders()["http_code"], "200 OK") !== false
+        ) {
             $body = $parcelshopRequest->getBody();
             $header = $parcelshopRequest->getResponseHeaders();
         } else {

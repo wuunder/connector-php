@@ -2,8 +2,6 @@
 
 namespace Wuunder\Model;
 
-use Wuunder\Model\Model;
-
 class ParcelshopModel extends Model
 {
     public function __construct($data)
