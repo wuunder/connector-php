@@ -2,7 +2,7 @@
 
 namespace Wuunder\Api;
 
-class ShipmentApiResponse extends ApiResponse {
+class ParcelshopApiResponse extends ApiResponse {
 
     public function __construct($header, $body, $error)
     {
@@ -10,11 +10,11 @@ class ShipmentApiResponse extends ApiResponse {
     }
 
     /**
-     * Returns booking url
+     * Returns parcelshop data
      *
      * @return mixed
      */
-    public function getShipmentData()
+    public function getParcelshopData()
     {
         return $this->getBody();
     }

@@ -21,6 +21,10 @@ abstract class Request {
         return $this->result;
     }
 
+    public function getBody() {
+        return substr($this->result, strpos($this->result, "\r\n\r\n"));
+    }
+
     public function getResponseHeaders()
     {
         $headers = array();

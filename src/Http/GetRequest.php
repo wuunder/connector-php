@@ -14,12 +14,11 @@ class GetRequest extends Request {
     public function send()
     {
         $cc = curl_init($this->url);
-        $this->log('API connection established');
 
         curl_setopt($cc, CURLOPT_HTTPHEADER,
             array('Authorization: Bearer ' . $this->apiKey, 'Content-type: application/json'));
         curl_setopt($cc, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($cc, CURLOPT_VERBOSE, 1);
+        curl_setopt($cc, CURLOPT_VERBOSE, 0);
         curl_setopt($cc, CURLOPT_HEADER, 1);
 
         // Execute the cURL, fetch the XML
