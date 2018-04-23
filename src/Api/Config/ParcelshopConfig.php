@@ -15,8 +15,8 @@ class ParcelshopConfig extends Config
     /**
     * Checks if the key is set, returns it if true
     *
-    * @return $setFields
     * @param $key
+    * @return $setFields
     */
     public function get($key)
     {

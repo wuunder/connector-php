@@ -49,10 +49,10 @@ abstract class Config implements \JsonSerializable
     }
 
     /**
+    * Camelcase to underscore
     *
-    *
-    * @return $result
     * @param $name
+    * @return $result
     */
     private function _underscore($name)
     {
@@ -65,10 +65,10 @@ abstract class Config implements \JsonSerializable
     }
 
     /**
+    * Checks wether all keys are used in array
     *
-    *
-    * @return bool
     * @param $keys, $arr
+    * @return bool
     */
     private function _arrayKeysExists(array $keys, array $arr)
     {
