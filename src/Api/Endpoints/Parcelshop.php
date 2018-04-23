@@ -25,7 +25,7 @@ class Parcelshop
     /**
      * Set data to send to API
      *
-     * @param ParcelshopConfig $config
+     * @param ParcelshopConfig $config Config of the request
      * @internal param mixed $data JSON encoded
      */
     public function setConfig(ParcelshopConfig $config)
