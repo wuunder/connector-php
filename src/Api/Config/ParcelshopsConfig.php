@@ -21,6 +21,11 @@ class ParcelshopsConfig extends Config
         );
     }
 
+    /**
+    * 
+    *
+    * @return $parameterString
+    */
     public function toGetParameters()
     {
         $parameterString = "";

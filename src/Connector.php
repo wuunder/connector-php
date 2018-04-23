@@ -16,7 +16,7 @@ class Connector
 
     private $apiKey;
     private $apiEnvironment;
-    private $logger; // Should become singleton
+    private $logger;
 
     public function __construct($apiKey, $isStaging = true)
     {
@@ -55,8 +55,11 @@ class Connector
         return new Parcelshop($this->apiKey, $this->apiEnvironment);
     }
 
+    /**
+    * Creates the logger functionality in Helper
+    *
+    */
     public function setLogger($loggerClass, $loggerFunc) {
-        // $this->logger = array($loggerClass, $loggerFunc);
         $helper = Helper::getInstance();
         if(empty($loggerClass)) {
             $helper->setLogger($loggerFunc);
@@ -65,9 +68,14 @@ class Connector
         }
     }
 
-    public function log() {
+    /**
+    * Logs the input parameter
+    *
+    * @param $logText
+    */
+    public function log($logText) {
         $helper = Helper::getInstance();
-        $helper->log("Hallo");
+        $helper->log($logText);
     }
 
 }

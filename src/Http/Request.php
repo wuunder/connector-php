@@ -17,14 +17,29 @@ abstract class Request {
 
     abstract protected function send();
 
+    /**
+    * Returns the whole response from a response
+    *
+    * @return $result
+    */
     public function getResponse() {
         return $this->result;
     }
 
+    /**
+    * Returns the response body from a response
+    *
+    * @return $result (body)
+    */
     public function getBody() {
         return substr($this->result, strpos($this->result, "\r\n\r\n"));
     }
 
+    /**
+    * Returns the headers from a response
+    *
+    * @return $headers
+    */
     public function getResponseHeaders()
     {
         $headers = array();

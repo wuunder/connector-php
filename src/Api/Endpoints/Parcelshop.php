@@ -7,6 +7,7 @@ use Wuunder\Api\Environment;
 use Wuunder\Api\Key;
 use Wuunder\Api\ParcelshopApiResponse;
 use Wuunder\Http\GetRequest;
+use Wuunder\Util\Helper;
 
 class Parcelshop
 {
@@ -14,12 +15,14 @@ class Parcelshop
     private $apiKey;
     private $apiEnvironment;
     private $parcelshopResponse;
+    private $logger;
 
     public function __construct(Key $apiKey, Environment $apiEnvironment)
     {
         $this->config = new ParcelshopConfig();
         $this->apiKey = $apiKey;
         $this->apiEnvironment = $apiEnvironment;
+        $this->logger = Helper::getInstance();
     }
 
     /**
@@ -52,8 +55,11 @@ class Parcelshop
     {
         $parcelshopRequest = new GetRequest($this->apiEnvironment->getStageBaseUrl() . "/parcelshops/" . $this->config->get("id"),
             $this->apiKey->getApiKey());
-        $parcelshopRequest->send();
-
+        try {
+          $parcelshopRequest->send();
+        } catch(Exception $e) {
+            $this->logger->log($e);
+        }
         $body = null;
         $header = null;
         $error = null;

@@ -3,17 +3,26 @@
 namespace Wuunder\Http;
 
 use Wuunder\Http\Request;
+use Wuunder\Util\Helper;
 
 class GetRequest extends Request {
+
+    private $logger;
 
     public function __construct($url, $apiKey)
     {
         parent::__construct($url, $apiKey);
+        $this->logger = Helper::getInstance();
     }
 
+    /**
+    * Sends a get request and recieves results
+    *
+    */
     public function send()
     {
         $cc = curl_init($this->url);
+        $this->logger->log("API connection established");
 
         curl_setopt($cc, CURLOPT_HTTPHEADER,
             array('Authorization: Bearer ' . $this->apiKey, 'Content-type: application/json'));
