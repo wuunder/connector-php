@@ -12,6 +12,7 @@ class Connector
 
     private $apiKey;
     private $apiEnvironment;
+    private $logger; // Should become singleton
 
     public function __construct($apiKey, $isStaging = true)
     {
@@ -37,5 +38,12 @@ class Connector
         return new Shipment($this->apiKey, $this->apiEnvironment);
     }
 
+    public function setLogger($loggerClass, $loggerFunc) {
+        $this->logger = array($loggerClass, $loggerFunc);
+    }
+
+    public function log() {
+        call_user_func_array($this->logger, array("This is the log function"));
+    }
 
 }

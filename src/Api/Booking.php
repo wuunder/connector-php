@@ -73,4 +73,17 @@ class Booking
     {
         return $this->bookingResponse;
     }
+
+    public $logger;
+
+    // Dit als input van $logger: Mage::helper('wuunderconnector')->log();
+    public function setLogger($logger, $logLine)
+    {
+
+      if(is_callable($logLine))
+      {
+
+      }
+
+    }
 }
