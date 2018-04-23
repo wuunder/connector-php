@@ -1,8 +1,11 @@
 <?php
 
-namespace Wuunder\Api;
+namespace Wuunder\Api\Endpoints;
 
 use Wuunder\Api\Config\ShipmentConfig;
+use Wuunder\Api\Environment;
+use Wuunder\Api\Key;
+use Wuunder\Api\ShipmentApiResponse;
 use Wuunder\Http\PostRequest;
 
 class Shipment {

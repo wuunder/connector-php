@@ -2,11 +2,12 @@
 
 namespace Wuunder;
 
-use Wuunder\Api\Booking;
 use Wuunder\Api\Key;
 use Wuunder\Api\Environment;
-use Wuunder\Api\Shipment;
-use Wuunder\Api\Parcelshops;
+use Wuunder\Api\Endpoints\Booking;
+use Wuunder\Api\Endpoints\Shipment;
+use Wuunder\Api\Endpoints\Parcelshops;
+use Wuunder\Api\Endpoints\Parcelshop;
 
 class Connector
 {
@@ -43,8 +44,12 @@ class Connector
      *
      * @return Parcelshops
      */
-    public function getParcelshops() {
+    public function getParcelshopsByAddress() {
         return new Parcelshops($this->apiKey, $this->apiEnvironment);
+    }
+
+    public function getParcelshopById() {
+        return new Parcelshop($this->apiKey, $this->apiEnvironment);
     }
 
 

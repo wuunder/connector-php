@@ -1,6 +1,6 @@
 <?php
 
-namespace Wuunder\Api;
+namespace Wuunder\Api\Endpoints;
 
 use Wuunder\Api\Config\ParcelshopsConfig;
 use Wuunder\Api\Environment;

@@ -19,7 +19,27 @@ include("Connector.php");
 
 $connector = new Wuunder\Connector("YVc7rKdM6e6Q_HQK81NCt7SM0LT0TtQB");
 
-$parcelshopsRequest = $connector->getParcelshops();
+
+$parcelshopRequest = $connector->getParcelshopById();
+
+$parcelshopConfig = new \Wuunder\Api\Config\ParcelshopConfig();
+$parcelshopConfig->setId("6fa97a3b-fabe-47eb-8cda-13a53b2f83df");
+
+if ($parcelshopConfig->validate()) {
+    $parcelshopRequest->setConfig($parcelshopConfig);
+
+    if ($parcelshopRequest->fire()) {
+        var_dump($parcelshopRequest->getParcelshopResponse()->getParcelshopData());
+    } else {
+        var_dump($parcelshopRequest->getParcelshopResponse()->getError());
+    }
+} else {
+    print("ParcelshopConfig not complete");
+}
+
+print("----------\r\n");
+
+$parcelshopsRequest = $connector->getParcelshopsByAddress();
 
 $parcelshopsConfig = new \Wuunder\Api\Config\ParcelshopsConfig();
 $parcelshopsConfig->setProviders(array("DHL_PARCEL", "DPD"));
@@ -38,7 +58,7 @@ if ($parcelshopsConfig->validate()) {
     print("ParcelshopsConfig not complete");
 }
 
-print("----------");
+print("----------\r\n");
 
 $booking = $connector->createBooking();
 
@@ -58,7 +78,7 @@ if ($bookingConfig->validate()) {
     print("Bookingconfig not complete");
 }
 
-print("----------");
+print("----------\r\n");
 
 $shipment = $connector->createShipment();
 

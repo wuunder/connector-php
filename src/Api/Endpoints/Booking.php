@@ -1,8 +1,11 @@
 <?php
 
-namespace Wuunder\Api;
+namespace Wuunder\Api\Endpoints;
 
+use Wuunder\Api\BookingApiResponse;
 use Wuunder\Api\Config\BookingConfig;
+use Wuunder\Api\Environment;
+use Wuunder\Api\Key;
 use Wuunder\Http\PostRequest;
 
 class Booking
