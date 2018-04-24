@@ -24,7 +24,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "connector-php\\": "src/"
+      "Wuunder\\": "src/Wuunder"
     }
   },
   "archive": {
