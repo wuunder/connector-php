@@ -2,6 +2,8 @@
 
 namespace Wuunder\Api;
 
+use Wuunder\Model\ShipmentModel;
+
 class ShipmentApiResponse extends ApiResponse {
 
     public function __construct($header, $body, $error)
@@ -12,10 +14,10 @@ class ShipmentApiResponse extends ApiResponse {
     /**
      * Returns booking url
      *
-     * @return mixed
+     * @return ShipmentModel
      */
     public function getShipmentData()
     {
-        return $this->getBody();
+        return new ShipmentModel($this->getBody());
     }
 }

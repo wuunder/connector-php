@@ -1,21 +1,19 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Timo
+ * User: Timo Janssen
  * Date: 18/04/2018
  * Time: 21:32
  */
 
 spl_autoload_register(function ($class_name) {
-    $file_name = str_replace("Wuunder/", "", str_replace("\\", DIRECTORY_SEPARATOR, $class_name)) . '.php';
+    $file_name = str_replace("Wuunder/", "../src/Wuunder/", str_replace("\\", DIRECTORY_SEPARATOR, $class_name)) . '.php';
 
     if (file_exists($file_name)) {
         include $file_name;
     }
 });
 
-
-include("Connector.php");
+include("../src/Wuunder/Connector.php");
 
 $connector = new Wuunder\Connector("YVc7rKdM6e6Q_HQK81NCt7SM0LT0TtQB");
 

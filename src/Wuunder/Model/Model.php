@@ -66,7 +66,7 @@ class Model
                     $validatedData[$key] = $value;
                 }
             } else {
-                throw new \Exception("Invalid data, unknown key " . $key);
+                $this->helper->log("Invalid data, unknown key " . $key);
             }
         }
         $this->data = $validatedData;
@@ -84,7 +84,7 @@ class Model
                     $validatedData[$key] = $value;
                 }
             } else {
-                throw new \Exception("Invalid data, unknown key " . $key);
+                $this->helper->log("Invalid data, unknown key " . $key);
             }
         }
         return $validatedData;
