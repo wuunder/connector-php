@@ -4,7 +4,7 @@ namespace Wuunder\Model;
 
 use Wuunder\Util\Helper;
 
-class Model
+class Model implements JsonSerializable
 {
     private $keys;
     protected $data;
@@ -104,5 +104,9 @@ class Model
         $result = strtolower(preg_replace('/(.)([A-Z])/', "$1_$2", $name));
         self::$_underscoreCache[$name] = $result;
         return $result;
+    }
+
+    public function jsonSerialize() {
+        return $this->data;
     }
 }

@@ -16,7 +16,6 @@ class Connector
 
     private $apiKey;
     private $apiEnvironment;
-    private $logger;
 
     public function __construct($apiKey, $isStaging = true)
     {
