@@ -4,7 +4,7 @@ namespace Wuunder\Model;
 
 use Wuunder\Util\Helper;
 
-class Model implements JsonSerializable
+class Model implements \JsonSerializable
 {
     private $keys;
     protected $data;
