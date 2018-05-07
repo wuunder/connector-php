@@ -17,7 +17,6 @@ include("../src/Wuunder/Connector.php");
 
 $connector = new Wuunder\Connector("YVc7rKdM6e6Q_HQK81NCt7SM0LT0TtQB");
 
-
 $parcelshopRequest = $connector->getParcelshopById();
 
 $parcelshopConfig = new \Wuunder\Api\Config\ParcelshopConfig();
@@ -27,7 +26,7 @@ if ($parcelshopConfig->validate()) {
     $parcelshopRequest->setConfig($parcelshopConfig);
 
     if ($parcelshopRequest->fire()) {
-        var_dump($parcelshopRequest->getParcelshopResponse()->getParcelshopData());
+        var_dump(json_encode($parcelshopRequest->getParcelshopResponse()->getParcelshopData()));
     } else {
         var_dump($parcelshopRequest->getParcelshopResponse()->getError());
     }
@@ -48,7 +47,7 @@ if ($parcelshopsConfig->validate()) {
     $parcelshopsRequest->setConfig($parcelshopsConfig);
 
     if ($parcelshopsRequest->fire()) {
-        var_dump($parcelshopsRequest->getParcelshopsResponse()->getParcelshopsData());
+        var_dump(json_encode($parcelshopsRequest->getParcelshopsResponse()->getParcelshopsData()));
     } else {
         var_dump($parcelshopsRequest->getParcelshopsResponse()->getError());
     }

@@ -11,13 +11,11 @@ class ParcelshopsConfig extends Config
         parent::__construct();
         $this->requiredFields = array(
             "providers",
-            "address",
-            "limit",
+            "address"
         );
         $this->fieldTypes = array(
             "providers" => "list",
-            "address" => "string",
-            "limit" => "integer"
+            "address" => "string"
         );
     }
 

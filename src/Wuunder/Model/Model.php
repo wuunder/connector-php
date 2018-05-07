@@ -8,6 +8,7 @@ class Model implements \JsonSerializable
 {
     private $keys;
     protected $data;
+    protected $helper;
     protected static $_underscoreCache = [];
 
     public function __construct()
