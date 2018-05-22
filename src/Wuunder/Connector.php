@@ -16,11 +16,13 @@ class Connector
 
     private $apiKey;
     private $apiEnvironment;
+    private $helper;
 
     public function __construct($apiKey, $isStaging = true)
     {
         $this->apiKey = new Key($apiKey);
         $this->apiEnvironment = new Environment($isStaging ? "staging" : "production");
+        $this->helper = Helper::getInstance();
     }
 
     /**
@@ -59,12 +61,21 @@ class Connector
     *
     */
     public function setLogger($loggerClass, $loggerFunc) {
-        $helper = Helper::getInstance();
+
         if(empty($loggerClass)) {
-            $helper->setLogger($loggerFunc);
+            $this->helper->setLogger($loggerFunc);
         } else {
-            $helper->setLogger(array($loggerClass, $loggerFunc));
+            $this->helper->setLogger(array($loggerClass, $loggerFunc));
         }
+    }
+
+    /**
+     * Sets user language, for translations
+     *
+     * @param $lang
+     */
+    public function setLanguage($lang) {
+        $this->helper->setTranslationLang($lang);
     }
 
     /**

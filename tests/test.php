@@ -16,6 +16,7 @@ spl_autoload_register(function ($class_name) {
 include("../src/Wuunder/Connector.php");
 
 $connector = new Wuunder\Connector("YVc7rKdM6e6Q_HQK81NCt7SM0LT0TtQB");
+$connector->setLanguage("NL");exit;
 
 $parcelshopRequest = $connector->getParcelshopById();
 
