@@ -56,6 +56,7 @@ class Helper
      */
     public function setTranslationLang($lang)
     {
+        global $translationData;
         $translationData = array();
         $file = realpath(dirname(dirname(__FILE__)) . "/etc/lang/en-" . strtolower($lang) . ".csv");
         if (file_exists($file)) {
@@ -73,6 +74,24 @@ class Helper
 
     public function translate($val)
     {
-//        if
+        global $translationData;
+
+        if (!in_array(strtolower($val), $translationData)) {
+            $translatedVal = $translationData[strtolower($val)];
+            if ($this->_startsWithUpper($val)) {
+                $translatedVal = ucfirst($translatedVal);
+            }
+            return $translatedVal;
+        }
+
+        return $val;
     }
+
+    private function _startsWithUpper($str)
+    {
+        $chr = mb_substr($str, 0, 1, "UTF-8");
+        return mb_strtolower($chr, "UTF-8") != $chr;
+    }
+
+
 }

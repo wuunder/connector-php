@@ -32,7 +32,8 @@ class Model implements \JsonSerializable
         return null;
     }
 
-    protected function setKeys($keys) {
+    protected function setKeys($keys)
+    {
         $formattedKeys = array();
         foreach ($keys as $k => $v) {
             if (is_array($v)) {
@@ -44,7 +45,8 @@ class Model implements \JsonSerializable
         $this->keys = $formattedKeys;
     }
 
-    private function formatInnerKeys($keys) {
+    private function formatInnerKeys($keys)
+    {
         $formattedKeys = array();
         foreach ($keys as $k => $v) {
             if (is_array($v)) {
@@ -56,14 +58,18 @@ class Model implements \JsonSerializable
         return $formattedKeys;
     }
 
-    protected function importData($data) {
+    protected function importData($data, $keysToTranslate = array())
+    {
         $data = json_decode($data);
         $validatedData = array();
         foreach ($data as $key => $value) {
             if (array_key_exists($key, $this->keys)) {
                 if (is_array($value)) {
-                    $validatedData[$key] = $this->loopInnerData($value, $this->keys[$key]);
+                    $validatedData[$key] = $this->loopInnerData($value, $this->keys[$key], $keysToTranslate);
                 } else {
+                    if (in_array($key, $keysToTranslate)) {
+                        $value = $this->helper->translate($value);
+                    }
                     $validatedData[$key] = $value;
                 }
             } else {
@@ -73,15 +79,19 @@ class Model implements \JsonSerializable
         $this->data = $validatedData;
     }
 
-    private function loopInnerData($data, $keysMap) {
+    private function loopInnerData($data, $keysMap, $keysToTranslate)
+    {
         $validatedData = array();
         foreach ($data as $key => $value) {
             if (array_key_exists($key, $keysMap) || is_object($value)) {
                 if (is_object($value)) {
-                    array_push($validatedData, $this->loopInnerData($value, $this->_isAssoc($keysMap) ? $keysMap[$key] : $keysMap[0]));
+                    array_push($validatedData, $this->loopInnerData($value, $this->_isAssoc($keysMap) ? $keysMap[$key] : $keysMap[0], $keysToTranslate));
                 } elseif (is_array($value)) {
-                    $validatedData[$key] = $this->loopInnerData($value, $keysMap[$key]);
+                    $validatedData[$key] = $this->loopInnerData($value, $keysMap[$key], $keysToTranslate);
                 } else {
+                    if (in_array($key, $keysToTranslate)) {
+                        $value = $this->helper->translate($value);
+                    }
                     $validatedData[$key] = $value;
                 }
             } else {
@@ -107,7 +117,8 @@ class Model implements \JsonSerializable
         return $result;
     }
 
-    public function jsonSerialize() {
+    public function jsonSerialize()
+    {
         return $this->data;
     }
 }

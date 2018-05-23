@@ -24,6 +24,6 @@ class ParcelshopsModel extends Model
             )
         ));
 
-        $this->importData($data);
+        $this->importData($data, array("weekday"));
     }
 }

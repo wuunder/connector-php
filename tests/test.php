@@ -16,7 +16,7 @@ spl_autoload_register(function ($class_name) {
 include("../src/Wuunder/Connector.php");
 
 $connector = new Wuunder\Connector("YVc7rKdM6e6Q_HQK81NCt7SM0LT0TtQB");
-$connector->setLanguage("NL");exit;
+$connector->setLanguage("NL");
 
 $parcelshopRequest = $connector->getParcelshopById();
 
@@ -35,7 +35,7 @@ if ($parcelshopConfig->validate()) {
     print("ParcelshopConfig not complete");
 }
 
-print("----------\r\n");
+print("----------\r\n"); exit;
 
 $parcelshopsRequest = $connector->getParcelshopsByAddress();
 

@@ -41,7 +41,7 @@ class ParcelshopModel extends Model
         parent::__construct();
         $this->setKeys(self::$modelStructure);
 
-        $this->importData($data);
+        $this->importData($data, array("weekday"));
     }
 
     final static function getStructure() {
