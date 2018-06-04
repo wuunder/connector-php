@@ -17,9 +17,9 @@
   },
   "authors": [
     {
-      "name": "Timo Janssen",
-      "email": "timo.janssen@wearewuunder.com",
-      "homepage": "https://wuunder.com"
+      "name": "Wuunder",
+      "email": "itsupport@wearewuunder.com",
+      "homepage": "https://wearewuunder.com/"
     }
   ],
   "autoload": {
