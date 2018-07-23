@@ -44,10 +44,10 @@ abstract class Request {
     {
         $headers = array();
 
-        $header_text = substr($this->result, 0, strpos($this->result, "\r\n\r\n"));
+        $header_text = substr($this->result, 0, strrpos($this->result, "\r\n\r\n"));
 
         foreach (explode("\r\n", $header_text) as $i => $line)
-            if ($i === 0)
+            if (count($line) > 5 && substr($line, 0, 5) === "HTTPV")
                 $headers['http_code'] = $line;
             else
             {

@@ -35,7 +35,7 @@ if ($parcelshopConfig->validate()) {
     print("ParcelshopConfig not complete");
 }
 
-print("----------\r\n"); exit;
+print("----------\r\n");
 
 $parcelshopsRequest = $connector->getParcelshopsByAddress();
 
