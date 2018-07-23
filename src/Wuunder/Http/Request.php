@@ -7,6 +7,7 @@ abstract class Request {
     protected $url;
     protected $apiKey;
     protected $result;
+    protected $headerSize;
 
 
     public function __construct($url, $apiKey)
@@ -44,10 +45,10 @@ abstract class Request {
     {
         $headers = array();
 
-        $header_text = substr($this->result, 0, strrpos($this->result, "\r\n\r\n"));
+        $header_text = substr($this->result, 0, $this->headerSize);
 
         foreach (explode("\r\n", $header_text) as $i => $line)
-            if (count($line) > 5 && substr($line, 0, 5) === "HTTPV")
+            if (count($line) > 4 && substr($line, 0, 4) === "HTTP")
                 $headers['http_code'] = $line;
             else
             {

@@ -33,6 +33,7 @@ class GetRequest extends Request {
         // Execute the cURL, fetch the XML
         $result = curl_exec($cc);
         $this->result = $result;
+        $this->headerSize = curl_getinfo($cc, CURLINFO_HEADER_SIZE);
 
         // Close connection
         curl_close($cc);
