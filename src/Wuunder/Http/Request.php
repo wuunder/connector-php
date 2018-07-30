@@ -2,7 +2,8 @@
 
 namespace Wuunder\Http;
 
-abstract class Request {
+abstract class Request
+{
 
     protected $url;
     protected $apiKey;
@@ -19,28 +20,30 @@ abstract class Request {
     abstract protected function send();
 
     /**
-    * Returns the whole response from a response
-    *
-    * @return $result
-    */
-    public function getResponse() {
+     * Returns the whole response from a response
+     *
+     * @return $result
+     */
+    public function getResponse()
+    {
         return $this->result;
     }
 
     /**
-    * Returns the response body from a response
-    *
-    * @return $result (body)
-    */
-    public function getBody() {
+     * Returns the response body from a response
+     *
+     * @return $result (body)
+     */
+    public function getBody()
+    {
         return substr($this->result, $this->headerSize);
     }
 
     /**
-    * Returns the headers from a response
-    *
-    * @return $headers
-    */
+     * Returns the headers from a response
+     *
+     * @return $headers
+     */
     public function getResponseHeaders()
     {
         $headers = array();
@@ -48,12 +51,10 @@ abstract class Request {
         $header_text = substr($this->result, 0, $this->headerSize);
 
         foreach (explode("\r\n", $header_text) as $i => $line)
-            if (strlen($line) > 4 && substr($line, 0, 4) === "HTTP")
+            if (strlen($line) > 4 && substr($line, 0, 4) === "HTTP") {
                 $headers['http_code'] = $line;
-            else
-            {
-                list ($key, $value) = explode(': ', $line);
-
+            } else {
+                list ($key, $value) = array_pad(explode(': ', $line, 2), 2, null);
                 $headers[$key] = $value;
             }
 
