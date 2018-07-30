@@ -16,7 +16,7 @@ abstract class Request {
         $this->apiKey = $apiKey;
     }
 
-    abstract protected function send();
+    abstract protected function seParcelshopsApiResponsend();
 
     /**
     * Returns the whole response from a response
@@ -33,7 +33,7 @@ abstract class Request {
     * @return $result (body)
     */
     public function getBody() {
-        return substr($this->result, strpos($this->result, "\r\n\r\n"));
+        return substr($this->result, $this->headerSize);
     }
 
     /**
