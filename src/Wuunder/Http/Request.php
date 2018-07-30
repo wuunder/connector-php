@@ -48,7 +48,7 @@ abstract class Request {
         $header_text = substr($this->result, 0, $this->headerSize);
 
         foreach (explode("\r\n", $header_text) as $i => $line)
-            if (count($line) > 4 && substr($line, 0, 4) === "HTTP")
+            if (strlen($line) > 4 && substr($line, 0, 4) === "HTTP")
                 $headers['http_code'] = $line;
             else
             {
