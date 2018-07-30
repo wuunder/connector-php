@@ -16,7 +16,7 @@ abstract class Request {
         $this->apiKey = $apiKey;
     }
 
-    abstract protected function seParcelshopsApiResponsend();
+    abstract protected function send();
 
     /**
     * Returns the whole response from a response
