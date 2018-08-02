@@ -76,7 +76,7 @@ class Helper
     {
         global $translationData;
 
-        if (!in_array(strtolower($val), $translationData)) {
+        if (is_array($translationData) && !in_array(strtolower($val), $translationData)) {
             $translatedVal = $translationData[strtolower($val)];
             if ($this->_startsWithUpper($val)) {
                 $translatedVal = ucfirst($translatedVal);

@@ -85,7 +85,7 @@ class Model implements \JsonSerializable
         foreach ($data as $key => $value) {
             if (array_key_exists($key, $keysMap) || is_object($value)) {
                 if (is_object($value)) {
-                    array_push($validatedData, $this->loopInnerData($value, $this->_isAssoc($keysMap) ? $keysMap[$key] : $keysMap[0], $keysToTranslate));
+                    $validatedData[$key] = $this->loopInnerData($value, $this->_isAssoc($keysMap) ? $keysMap[$key] : $keysMap[0], $keysToTranslate);
                 } elseif (is_array($value)) {
                     $validatedData[$key] = $this->loopInnerData($value, $keysMap[$key], $keysToTranslate);
                 } else {

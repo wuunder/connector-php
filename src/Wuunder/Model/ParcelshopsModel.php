@@ -16,7 +16,11 @@ class ParcelshopsModel extends Model
                 "street_name",
                 "state",
                 "house_number",
-                "city"
+                "city",
+                "phone_number",
+                "email_address",
+                "country_name",
+                "alpha2"
             ),
             "location" => array(
                 "lng",
