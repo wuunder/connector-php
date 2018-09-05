@@ -90,7 +90,7 @@ class Helper
     private function _startsWithUpper($str)
     {
         $chr = mb_substr($str, 0, 1, "UTF-8");
-        return mb_strtolower($chr, "UTF-8") != $chr;
+        return ctype_upper($chr);
     }
 
 
