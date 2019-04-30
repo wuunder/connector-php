@@ -2,6 +2,7 @@
 
 namespace Wuunder;
 
+use Wuunder\Api\Endpoints\Drafts;
 use Wuunder\Api\Key;
 use Wuunder\Api\Environment;
 use Wuunder\Api\Endpoints\Booking;
@@ -23,6 +24,15 @@ class Connector
         $this->apiKey = new Key($apiKey);
         $this->apiEnvironment = new Environment($isStaging ? "staging" : "production");
         $this->helper = Helper::getInstance();
+    }
+
+    /**
+     * Creates a new Booking
+     *
+     * @return Drafts
+     */
+    public function createBulkDrafts() {
+        return new Drafts($this->apiKey, $this->apiEnvironment);
     }
 
     /**

@@ -7,6 +7,37 @@ Installation:
 Set-up connection:  
 `$connector = new Wuunder\Connector("API_KEY");`
 
+
+Create Draft bulk booking:
+```php
+$draftsRequest = $connector->createBulkDrafts();
+
+$draftsConfig = new \Wuunder\Api\Config\DraftConfig();
+
+$booking1 = new \Wuunder\Api\Config\BookingConfig();
+$booking1->setWebhookUrl("url");
+$booking1->setRedirectUrl("url");
+
+$booking2 = new \Wuunder\Api\Config\BookingConfig();
+$booking2->setWebhookUrl("url");
+$booking2->setRedirectUrl("url");
+
+$draftsConfig->addBookingConfig(1, $booking1, true);
+$draftsConfig->addBookingConfig(2, $booking2, true);
+
+if ($draftsConfig->validate()) {
+    $draftsRequest->setConfig($draftsConfig);
+
+    if ($draftsRequest->fire()) {
+        var_dump($draftsRequest->getDraftsResponse());
+    } else {
+        var_dump($draftsRequest->getDraftsResponse()->getError());
+    }
+} else {
+    print("DraftsConfig not valid");
+}
+```
+
 Create booking:
 ```php
 $booking = $connector->createBooking();
