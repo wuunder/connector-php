@@ -24,6 +24,10 @@ abstract class Config implements \JsonSerializable
                 $key = $this->_underscore(substr($method, 3));
                 $this->setFields[$key] = isset($args[0]) ? $args[0] : null;
                 break;
+            case 'get' :
+                $key = $this->_underscore(substr($method, 3));
+                return isset($this->setFields[$key]) ? $this->setFields[$key] : null;
+                break;
         }
     }
 
