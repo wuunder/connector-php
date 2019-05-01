@@ -55,10 +55,10 @@ class Drafts
      */
     public function fire()
     {
-        $bookingRequest = new PostRequest($this->apiEnvironment->getStageBaseUrl() . "/drafts",
+        $draftRequest = new PostRequest($this->apiEnvironment->getStageBaseUrl() . "/drafts",
             $this->apiKey->getApiKey(), json_encode($this->config->getDrafts()));
         try {
-            $bookingRequest->send();
+            $draftRequest->send();
         } catch(Exception $e) {
             $this->logger->log($e);
         }
@@ -67,10 +67,13 @@ class Drafts
         $header = null;
         $error = null;
 
-        if (isset($bookingRequest->getResponseHeaders()["location"])) {
-            $header = $bookingRequest->getResponseHeaders();
+        if (isset($draftRequest->getResponseHeaders()["http_code"])
+            && strpos($draftRequest->getResponseHeaders()["http_code"], "200 OK") !== false
+        ) {
+            $header = $draftRequest->getResponseHeaders();
+            $body = $draftRequest->getBody();
         } else {
-            $error = $bookingRequest->getResponse();
+            $error = $draftRequest->getResponse();
         }
         $this->draftsResponse = new DraftsApiResponse($header, $body, $error);
 
