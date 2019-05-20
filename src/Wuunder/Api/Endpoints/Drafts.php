@@ -68,7 +68,7 @@ class Drafts
         $error = null;
 
         if (isset($draftRequest->getResponseHeaders()["http_code"])
-            && strpos($draftRequest->getResponseHeaders()["http_code"], "200 OK") !== false
+            && strpos($draftRequest->getResponseHeaders()["http_code"], "200") !== false
         ) {
             $header = $draftRequest->getResponseHeaders();
             $body = $draftRequest->getBody();

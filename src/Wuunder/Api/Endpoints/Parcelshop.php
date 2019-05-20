@@ -65,7 +65,7 @@ class Parcelshop
         $error = null;
 
         if (isset($parcelshopRequest->getResponseHeaders()["http_code"])
-            && strpos($parcelshopRequest->getResponseHeaders()["http_code"], "200 OK") !== false
+            && strpos($parcelshopRequest->getResponseHeaders()["http_code"], "200") !== false
         ) {
             $body = $parcelshopRequest->getBody();
             $header = $parcelshopRequest->getResponseHeaders();
