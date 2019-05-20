@@ -65,7 +65,7 @@ class Shipment {
         $header = null;
         $error = null;
 
-        if (isset($shipmentRequest->getResponseHeaders()["http_code"]) && strpos($shipmentRequest->getResponseHeaders()["http_code"], "201 Created") !== false) {
+        if (isset($shipmentRequest->getResponseHeaders()["http_code"]) && strpos($shipmentRequest->getResponseHeaders()["http_code"], "201") !== false) {
             $body = $shipmentRequest->getBody();
             $header = $shipmentRequest->getResponseHeaders();
         } else {
